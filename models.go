@@ -4,7 +4,7 @@ import "fmt"
 
 type Movie struct {
 	ID          int64  `db:"id"`
-	Title       int64  `db:"title"`
+	Title       string `db:"title"`
 	ReleaseDate string `db:"release_date"`
 	Duration    int    `db:"duration"`
 	TrailerUrl  string `db:"trailer_url"`
