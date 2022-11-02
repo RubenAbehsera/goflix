@@ -1,7 +1,10 @@
 package main
 
+import "github.com/gorilla/mux"
+
 type server struct {
-	store Store
+	router *mux.Router
+	store  Store
 }
 
 func newServer() *server {
