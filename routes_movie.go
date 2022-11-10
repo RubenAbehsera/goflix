@@ -42,7 +42,7 @@ func (s *server) handleMovieDetail() http.HandlerFunc {
 			s.respond(w, r, nil, http.StatusInternalServerError)
 			return
 		}
-		movie, err := s.store.GetMovieByID(id)
+		movie, err := s.store.GetMovieById(id)
 		log.Printf("%v", movie)
 		if err != nil {
 			log.Printf("Cannot load movie. err=%v\n", err)
