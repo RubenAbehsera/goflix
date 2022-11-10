@@ -70,3 +70,32 @@ func TestMovieCreateUnit(t *testing.T) {
 	srv.handleMovieCreate()(w, r)
 	assert.Equal(t, http.StatusOK, w.Code)
 }
+
+func TestMovieCreateIntegration(t *testing.T) {
+	// Create server with Test db
+	srv := newServer()
+	srv.store = &testStore{}
+
+	// Prepare json body
+	p := struct {
+		Title       string `json:"title"`
+		ReleaseDate string `json:"release_date"`
+		Duration    int    `json:"duration"`
+		TrailerUrl  string `json:"trailer_url"`
+	}{
+		Title:       "Inception",
+		ReleaseDate: "2010-07-18",
+		Duration:    148,
+		TrailerUrl:  "http://url",
+	}
+
+	var buf bytes.Buffer
+	err := json.NewEncoder(&buf).Encode(p)
+	assert.Nil(t, err)
+
+	r := httptest.NewRequest("POST", "/api/movies/", &buf)
+	w := httptest.NewRecorder()
+
+	srv.serveHTTP(w, r)
+	assert.Equal(t, http.StatusOK, w.Code)
+}
