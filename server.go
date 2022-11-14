@@ -7,6 +7,8 @@ import (
 	"net/http"
 )
 
+const JWT_APP_KEY = "goflix.go"
+
 type server struct {
 	router *mux.Router
 	store  Store
